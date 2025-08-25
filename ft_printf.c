@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:53:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/08/22 14:01:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:55:19 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_spec	spec_map(int specifier)
 	['p'] = ft_aux_ptr,
 	['d'] = ft_aux_nbr,
 	['i'] = ft_aux_nbr,
-	['u'] = ft_aux_nbr,
+	['u'] = ft_aux_unbr,
 	['x'] = ft_aux_hex,
 	['X'] = ft_aux_hex,
 	['%'] = ft_aux_char
