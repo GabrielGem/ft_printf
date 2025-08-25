@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:41:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/08/21 19:16:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:58:50 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "./libft/libft.h"
 
 int	ft_printf(char const *s, ...);
 
 typedef int	(*t_spec)(va_list ap, char flag);
 
-int	ft_aux_char(va_list ap, char c);
-int	ft_aux_str(va_list ap, char c);
-int	ft_aux_ptr(va_list ap, char c);
-int	ft_aux_nbr(va_list ap, char c);
-int	ft_aux_hex(va_list ap, char c);
+int	ft_aux_char(va_list ap, char flag);
+int	ft_aux_str(va_list ap, char flag);
+int	ft_aux_ptr(va_list ap, char flag);
+int	ft_aux_nbr(va_list ap, char flag);
+int	ft_aux_unbr(va_list ap, char flag);
+int	ft_aux_hex(va_list ap, char flag);
 
 //typedef enum e_specifier
 //{

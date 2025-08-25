@@ -3,24 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+         #
+#    By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/10 16:27:23 by gabrgarc          #+#    #+#              #
-#    Updated: 2025/08/21 19:14:58 by gabrgarc         ###   ########.fr        #
+#    Updated: 2025/08/24 14:45:33 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CC = cc
-FLAGS = -Wall -Wextra -Werror -I./libft/libft.h
+FLAGS = -Wall -Wextra -Werror
 
 SRCS = \
 	ft_printf.c \
-	ft_aux_char.c \
-	ft_aux_hex.c \
-	ft_aux_nbr.c \
-	ft_aux_ptr.c \
-	ft_aux_str.c
+	ft_aux_chrs.c \
+	ft_aux_nbrs.c \
+	ft_aux_ptr.c 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -43,10 +41,11 @@ $(LIBFT_A):
 
 clean:
 	rm -rf $(OBJS)
-	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) clean -C $(LIBFT)
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
 
