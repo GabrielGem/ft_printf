@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_aux_hex.c                                       :+:      :+:    :+:   */
+/*   ft_aux_chrs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 14:51:44 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/08/21 19:16:52 by gabrgarc         ###   ########.fr       */
+/*   Created: 2025/08/24 14:36:20 by gabrgarc          #+#    #+#             */
+/*   Updated: 2025/08/24 16:00:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_aux_hex(va_list ap, char c)
+int	ft_aux_char(va_list ap, char flag)
 {
-	char	*result;
-	char	*symbols;
-	int		count;
-
-	if (c == 'x')
-		symbols = "0123456789abcdef";
+	if (flag == 'c')
+		ft_putchar_fd(va_arg(ap, int), 1);
 	else
-		symbols = "0123456789ABCDEF";
-	result = ft_itoa_base(va_arg(ap, unsigned int), symbols);
-	ft_putstr_fd(result, 1);
-	count = ft_strlen(result);
+		ft_putchar_fd('%', 1);
+	return (1);
+}
+
+int	ft_aux_str(va_list ap, char flag)
+{
+	int		count;
+	char	*str;
+
+	flag = 0;
+	count = 0;
+	str = va_arg(ap, char *);
+	if (!str)
+		str = "(null)";
+	ft_putstr_fd(str, 1);
+	count = ft_strlen(str);
 	return (count);
 }
