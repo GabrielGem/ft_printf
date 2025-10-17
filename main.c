@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:37:25 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/17 11:23:32 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/17 17:24:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,23 @@ void	plus(int num, t_ui unbr)
 	printf("or: %d\n", j);
 }
 
+void	mix_flags(char c, char *str, char *ptr, int num, t_ui unbr)
+{
+	int	i, j;
+
+	(void)c;
+	(void)str;
+	(void)ptr;
+	(void)num;
+
+	printf("\n---mix_flags---\n");
+	
+	i = ft_printf("[% #20x]\t", unbr);
+	printf("my: %d\n", i);
+	j = printf("[% #20x]\t", unbr);
+	printf("or: %d\n", j);
+}
+
 int	main(void)
 {
 	char	c = 'g';
@@ -221,9 +238,10 @@ int	main(void)
 	hashtag(unbr);
 	space(num);
 	plus(num, unbr);
+	mix_flags(c, str, ptr, num, unbr);
 	
-	printf("\n---precision---\n");
-	ft_printf("[%.1d]\t", num);
-	printf("[%.1d]\t", num);
-	return (0);
+	//printf("\n---precision---\n");
+	//ft_printf("[%.1d]\t", num);
+	//printf("[%.1d]\t", num);
+	//return (0);
 }
