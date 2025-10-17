@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:41:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/17 09:41:02 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:35:46 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ int			isspecifier(char c);
 int			isflag(char c);
 
 void		flag_space(t_format *parameters);
+void		flag_minus(t_format *parameters);
 void		flag_width(t_format *parameters, char c);
 
 char		*string_realloc(t_format *parameters, char *str);
 char		*string_width(t_format *parameters, char *str);
 int			ft_pad(int size, t_format *parameters);
+int			sign(t_format *parameters);
+int			prefix(t_format *parameters);
 
 int			ft_aux_char(va_list ap, t_format *flags);
 int			ft_aux_str(va_list ap, t_format *flags);
