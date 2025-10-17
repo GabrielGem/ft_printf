@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 08:36:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/17 09:56:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:35:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	flag_space(t_format *parameters)
 		parameters->flags &= ~SPACE;
 }
 
+void	flag_minus(t_format *parameters)
+{
+	parameters->flags |= MINUS;
+	if (parameters->flags & ZERO)
+		parameters->flags &= ~ZERO;
+}
+
 void	flag_width(t_format *parameters, char c)
 {
 	if (parameters->flags & DOT)
@@ -28,7 +35,6 @@ void	flag_width(t_format *parameters, char c)
 	}
 	parameters->width = (parameters->width * 10) + c - '0';
 }
-
 
 char	*string_width(t_format *parameters, char *str)
 {
@@ -64,6 +70,24 @@ int	ft_pad(int size, t_format *parameters)
 	while (size--)
 		ft_putchar_fd(c, 1);
 	return (printd);
+}
+
+int	sign(t_format *flags)
+{
+	if ((flags->flags & PLUS))
+		ft_putchar_fd('+', 1);
+	if ((flags->flags & SPACE))
+		ft_putchar_fd(' ', 1);
+	return (1);
+}
+
+int	prefix(t_format *flags)
+{
+	if (flags->specifier == 'x')
+		ft_putstr_fd("0x", 1);
+	if (flags->specifier == 'X')
+		ft_putstr_fd("0X", 1);
+	return (2);
 }
 
 char	*string_realloc(t_format *parameters, char *str)
