@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:53:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/08/24 15:55:19 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:13:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,59 @@ t_spec	spec_map(int specifier)
 	return (map[specifier]);
 }
 
-int	handleflags(va_list ap, char specifier)
+int	handleformat(va_list ap, const char *str, t_format *flags)
 {
-	int		count;
-	t_spec	ft;
+	int	count;
 
 	count = 0;
-	ft = spec_map(specifier);
-	count += ft(ap, specifier);
+	flags->index_spec = parse(str, flags);
+	if (!flags->ft_specifier)
+		return (-1);
+	if (flags->flags & MINUS)
+		flags->width *= -1;
+	count += flags->ft_specifier(ap, flags);
+	if ((flags->flags & MINUS) && ((flags->width * -1) > count))
+		count += ft_pad((flags->width * -1) - count, flags);
 	return (count);
+}
+
+int	parse(const char *str, t_format *parameters)
+{
+	char		*start;
+
+	start = (char *)str;
+	while ((isspecifier(*str) || isflag(*str) || ft_isdigit(*str)) && *str)
+	{
+		if (*str == '-')
+			parameters->flags |= MINUS;
+		if (*str == '+')
+			parameters->flags |= PLUS;
+		if (*str == ' ')
+			flag_space(parameters);
+		if (*str == '#')
+			parameters->flags |= HASHTAG;
+		if (*str == '0' && parameters->width == 0 && !(parameters->flags & MINUS))
+			parameters->flags |= ZERO;
+		if (*str == '.')
+			parameters->flags |= DOT;
+		if (ft_isdigit(*str))
+			flag_width(parameters, *str);
+		if (isspecifier(*str))
+		{
+			parameters->specifier = *str;
+			parameters->ft_specifier = spec_map(*str);
+			return (str - start + 2);
+		}
+		str++;
+	}
+	return (str - start + 2);
 }
 
 int	ft_printf(const char *s, ...)
 {
-	va_list	ap;
-	int		count;
+	va_list		ap;
+	int			count;
+	t_format	flags;
 
 	va_start(ap, s);
 	count = 0;
@@ -56,8 +94,9 @@ int	ft_printf(const char *s, ...)
 		}
 		else
 		{
-			count += handleflags(ap, *(s + 1));
-			s += 2;
+			flags = initformat();
+			count += handleformat(ap, (s + 1), &flags);
+			s += flags.index_spec; // save info about where the flags end
 		}
 	}
 	va_end(ap);

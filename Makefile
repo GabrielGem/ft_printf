@@ -6,46 +6,48 @@
 #    By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/10 16:27:23 by gabrgarc          #+#    #+#              #
-#    Updated: 2025/08/24 14:45:33 by gabrgarc         ###   ########.fr        #
+#    Updated: 2025/10/16 08:43:14 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 SRCS = \
 	ft_printf.c \
 	ft_aux_chrs.c \
 	ft_aux_nbrs.c \
-	ft_aux_ptr.c 
+	ft_aux_ptr.c \
+	printf_utils.c \
+	flags_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
-LIBFT = libft
-LIBFT_A = $(LIBFT)/libft.a
+LIBFT = libft.a
+LIBFT_DIR = libft/
 
 ALL_OBJS = $(OBJS)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_A)
-	cp $(LIBFT_A) $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	cp $(LIBFT_DIR)$(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
-$(LIBFT_A):
-	$(MAKE) -C $(LIBFT) all
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
-	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -rf $(NAME)
-	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

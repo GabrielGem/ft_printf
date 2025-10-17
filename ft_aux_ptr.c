@@ -6,21 +6,18 @@
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:56:01 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/08/22 20:24:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:02:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_aux_ptr(va_list ap, char c)
+int	ft_aux_ptr(va_list ap, t_format *flags)
 {
-	char				*symbols;
 	char				*address;
 	int					count;
 	unsigned long int	ptr;
 
-	c = 0;
-	symbols = "0123456789abcdef";
 	count = 0;
 	ptr = va_arg(ap, unsigned long int);
 	if (!ptr)
@@ -28,10 +25,12 @@ int	ft_aux_ptr(va_list ap, char c)
 		ft_putstr_fd("(nil)", 1);
 		return (5);
 	}
-	address = ft_uitoa_base(ptr, symbols);
+	address = ft_uitoa_base(ptr, "0123456789abcdef");
+	count = ft_strlen(address) + 2;
+	if (flags->width > count)
+		count += ft_pad(flags->width - count, flags);
 	ft_putstr_fd("0x", 1);
 	ft_putstr_fd(address, 1);
-	count = ft_strlen(address) + 2;
 	free(address);
 	return (count);
 }
