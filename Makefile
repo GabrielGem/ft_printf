@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/10 16:27:23 by gabrgarc          #+#    #+#              #
-#    Updated: 2025/10/16 08:43:14 by gabrgarc         ###   ########.fr        #
+#    Updated: 2025/10/18 15:04:10 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS = \
 	ft_aux_nbrs.c \
 	ft_aux_ptr.c \
 	printf_utils.c \
-	flags_utils.c
+	flags_utils.c \
+	padded.c
 
 OBJS = $(SRCS:.c=.o)
 
