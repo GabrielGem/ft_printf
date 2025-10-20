@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:56:03 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/15 17:23:12 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:05:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	isflag(char c)
 	if (ft_strchr("-0.# +", c))
 		return (1);
 	return (0);
+}
+
+void	switch_flags(t_format *format, char c)
+{
+	if (c == '-')
+		format->flags |= MINUS;
+	if (c == '+')
+		format->flags |= PLUS;
+	if (c == ' ')
+		flag_space(format);
+	if (c == '#')
+		format->flags |= HASHTAG;
+	if (c == '0' && format->width == 0 && !(format->flags & MINUS))
+		format->flags |= ZERO;
+	if (c == '.')
+		format->flags |= DOT;
 }
 
 t_format	initformat(void)
