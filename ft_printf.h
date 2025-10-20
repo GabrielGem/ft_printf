@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:41:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/17 19:35:46 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:31:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,7 @@
 
 typedef struct s_format	t_format;
 
-typedef int	(*t_spec)(va_list ap, t_format *flags);
-
-enum e_flags
-{
-	MINUS = 0b1,
-	PLUS = 0b10,
-	SPACE = 0b100,
-	HASHTAG = 0b1000,
-	ZERO = 0b10000,
-	DOT = 0b100000
-};
+typedef int				(*t_spec)(va_list ap, t_format *flags);
 
 struct s_format
 {
@@ -40,6 +30,16 @@ struct s_format
 	char	specifier;
 	t_spec	ft_specifier;
 	int		index_spec;
+};
+
+enum e_flags
+{
+	MINUS = 0b1,
+	PLUS = 0b10,
+	SPACE = 0b100,
+	HASHTAG = 0b1000,
+	ZERO = 0b10000,
+	DOT = 0b100000
 };
 
 int			ft_printf(char const *s, ...);
@@ -52,18 +52,17 @@ int			isflag(char c);
 void		flag_space(t_format *parameters);
 void		flag_minus(t_format *parameters);
 void		flag_width(t_format *parameters, char c);
+void		switch_flags(t_format *format, char c);
 
-char		*string_realloc(t_format *parameters, char *str);
-char		*string_width(t_format *parameters, char *str);
 int			ft_pad(int size, t_format *parameters);
-int			sign(t_format *parameters);
-int			prefix(t_format *parameters);
+int			sign(t_format *format);
+int			prefix(t_format *format);
 
-int			ft_aux_char(va_list ap, t_format *flags);
-int			ft_aux_str(va_list ap, t_format *flags);
-int			ft_aux_ptr(va_list ap, t_format *flags);
-int			ft_aux_nbr(va_list ap, t_format *flags);
-int			ft_aux_unbr(va_list ap, t_format *flags);
-int			ft_aux_hex(va_list ap, t_format *flags);
+int			ft_aux_char(va_list ap, t_format *format);
+int			ft_aux_str(va_list ap, t_format *format);
+int			ft_aux_ptr(va_list ap, t_format *format);
+int			ft_aux_nbr(va_list ap, t_format *format);
+int			ft_aux_unbr(va_list ap, t_format *format);
+int			ft_aux_hex(va_list ap, t_format *format);
 
 #endif
