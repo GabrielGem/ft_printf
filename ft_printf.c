@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:53:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/17 10:13:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:39:56 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,21 @@ int	handleformat(va_list ap, const char *str, t_format *flags)
 	return (count);
 }
 
-int	parse(const char *str, t_format *parameters)
+int	parse(const char *str, t_format *format)
 {
 	char		*start;
 
 	start = (char *)str;
 	while ((isspecifier(*str) || isflag(*str) || ft_isdigit(*str)) && *str)
 	{
-		if (*str == '-')
-			parameters->flags |= MINUS;
-		if (*str == '+')
-			parameters->flags |= PLUS;
-		if (*str == ' ')
-			flag_space(parameters);
-		if (*str == '#')
-			parameters->flags |= HASHTAG;
-		if (*str == '0' && parameters->width == 0 && !(parameters->flags & MINUS))
-			parameters->flags |= ZERO;
-		if (*str == '.')
-			parameters->flags |= DOT;
+		if (isflag(*str))
+			switch_flags(format, *str);
 		if (ft_isdigit(*str))
-			flag_width(parameters, *str);
+			flag_width(format, *str);
 		if (isspecifier(*str))
 		{
-			parameters->specifier = *str;
-			parameters->ft_specifier = spec_map(*str);
+			format->specifier = *str;
+			format->ft_specifier = spec_map(*str);
 			return (str - start + 2);
 		}
 		str++;
@@ -81,7 +71,7 @@ int	ft_printf(const char *s, ...)
 {
 	va_list		ap;
 	int			count;
-	t_format	flags;
+	t_format	format;
 
 	va_start(ap, s);
 	count = 0;
@@ -94,9 +84,9 @@ int	ft_printf(const char *s, ...)
 		}
 		else
 		{
-			flags = initformat();
-			count += handleformat(ap, (s + 1), &flags);
-			s += flags.index_spec; // save info about where the flags end
+			format = initformat();
+			count += handleformat(ap, (s + 1), &format);
+			s += format.index_spec;
 		}
 	}
 	va_end(ap);
