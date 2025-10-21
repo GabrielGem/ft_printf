@@ -14,9 +14,9 @@
 
 int	ft_aux_nbr(va_list ap, t_format *format)
 {
-	int		num;
-	int		count;
-	char	*result;
+	long int	num;
+	int			count;
+	char		*result;
 
 	num = va_arg(ap, int);
 	count = 0;
@@ -26,13 +26,10 @@ int	ft_aux_nbr(va_list ap, t_format *format)
 		if (num < 0)
 			num *= -1;
 	}
-	result = ft_itoa(num);
-	count += ft_strlen(result);
+	result = ft_itoa_base(num, "0123456789");
 	if (format->flags & DOT)
-	{
 		result = precision(format, result);
-		count = ft_strlen(result);
-	}
+	count += ft_strlen(result);
 	if (format->width > count)
 		count += ft_pad(format->width - count, format);
 	ft_putstr_fd(result, 1);
@@ -47,6 +44,8 @@ int	ft_aux_unbr(va_list ap, t_format *format)
 
 	count = 0;
 	result = ft_uitoa_base(va_arg(ap, unsigned int), "0123456789");
+	if (format->flags & DOT)
+		result = precision(format, result);
 	count = ft_strlen(result);
 	if (format->width > count)
 		count += ft_pad((format->width - count), format);
@@ -65,8 +64,10 @@ int	ft_aux_hex(va_list ap, t_format *format)
 	if (format->specifier == 'X')
 		symbols = "0123456789ABCDEF";
 	result = ft_itoa_base(va_arg(ap, unsigned int), symbols);
+	if (format->flags & DOT)
+		result = precision(format, result);
 	count = ft_strlen(result);
-	if (format->flags & HASHTAG)
+	if (format->flags & HASHTAG && result[0] != '0')
 		count += prefix(format);
 	if ((format->flags & HASHTAG) && format->width > count + 2)
 		count += ft_pad(format->width - count, format);
