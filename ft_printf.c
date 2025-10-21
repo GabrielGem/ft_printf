@@ -37,7 +37,7 @@ int	handleformat(va_list ap, const char *str, t_format *flags)
 	flags->index_spec = parse(str, flags);
 	if (!flags->ft_specifier)
 		return (-1);
-	if (flags->flags & MINUS)
+	if (flags->flags & MINUS && flags->specifier != '%')
 		flags->width *= -1;
 	count += flags->ft_specifier(ap, flags);
 	if ((flags->flags & MINUS) && ((flags->width * -1) > count))
@@ -60,7 +60,7 @@ int	parse(const char *str, t_format *format)
 		{
 			format->specifier = *str;
 			format->ft_specifier = spec_map(*str);
-			return (str - start + 2);
+			break ;
 		}
 		str++;
 	}
