@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 14:36:20 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/18 15:22:40 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:42:34 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,25 @@ int	ft_aux_char(va_list ap, t_format *format)
 int	ft_aux_str(va_list ap, t_format *format)
 {
 	int		count;
+	int		print;
+	int		i;
 	char	*str;
 
 	count = 0;
+	i = -1;
 	str = va_arg(ap, char *);
 	if (!str)
 		str = "(null)";
 	count = ft_strlen(str);
+	print = count;
+	if ((format->flags & DOT) && format->precision < count)
+	{
+		print = format->precision;
+		count = print;
+	}
 	if (format->width > count)
-		count += ft_pad(format->width - count, format);
-	ft_putstr_fd(str, 1);
+		count += ft_pad(format->width - print, format);
+	while (++i < print)
+		ft_putchar_fd(str[i], 1);
 	return (count);
 }
