@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:37:25 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/18 16:25:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:52:57 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,117 @@ void	mix_flags(char c, char *str, char *ptr, int num, t_ui unbr)
 	printf("my: %d\n", i);
 	j = printf("[%+020d]\t", num);
 	printf("or: %d\n", j);
+
+	i = ft_printf("[%0+20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%0+20d]\t", num);
+	printf("or: %d\n", j);
+
+	num *= -1;
+	i = ft_printf("[%0+20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%0+20d]\t", num);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%0 20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%0 20d]\t", num);
+	printf("or: %d\n", j);
+
+	num *= -1;
+	i = ft_printf("[%0 20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%0 20d]\t", num);
+	printf("or: %d\n", j);
+	
+	i = ft_printf("[%0#20x][%0#20X]\t", unbr, unbr);
+	printf("my: %d\n", i);
+	j = printf("[%#020x][%0#20X]\t", unbr, unbr);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[% -20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[% -20d]\t", num);
+	printf("or: %d\n", j);
+
+	num *= -1;
+	i = ft_printf("[% -20d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[% -20d]\t", num);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[% 020d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[% 020d]\t", num);
+	printf("or: %d\n", j);
+
+	num *= -1;
+	i = ft_printf("[% 020d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[% 020d]\t", num);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%#-20x][%#-20X]\t", unbr, unbr);
+	printf("my: %d\n", i);
+	j = printf("[%#-20x][%#-20X]\t", unbr, unbr);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%#020x][%#020X]\t", unbr, unbr);
+	printf("my: %d\n", i);
+	j = printf("[%#020x][%#020X]\t", unbr, unbr);
+	printf("or: %d\n", j);
+}
+
+void	precision_flag(char *str, int num, int unbr)
+{
+	int i, j;
+
+	i = ft_printf("[%.3s]\t", str);
+	printf("my: %d\n", i);
+	j = printf("[%.3s]\t", str);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%.10s]\t", str);
+	printf("my: %d\n", i);
+	j = printf("[%.10s]\t", str);
+	printf("or: %d\n", j);
+	
+	i = ft_printf("[%10.3s]\t", str);
+	printf("my: %d\n", i);
+	j = printf("[%10.3s]\t", str);
+	printf("or: %d\n", j);
+	
+	i = ft_printf("[%-10.3s]\t", str);
+	printf("my: %d\n", i);
+	j = printf("[%-10.3s]\t", str);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%-10.5d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%-10.5d]\t", num);
+	printf("or: %d\n", j);
+
+	num *= -1;
+	i = ft_printf("[%-10.5d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%-10.5d]\t", num);
+	printf("or: %d\n", j);
+
+	num = 0;
+	i = ft_printf("[%-10.0d]\t", num);
+	printf("my: %d\n", i);
+	j = printf("[%-10.0d]\t", num);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%-10.0u]\t", unbr);
+	printf("my: %d\n", i);
+	j = printf("[%-10.0u]\t", unbr);
+	printf("or: %d\n", j);
+
+	i = ft_printf("[%20.2x][%20.2X]\t", unbr, unbr);
+	printf("my: %d\n", i);
+	j = printf("[%20.2x][%20.2X]\t", unbr, unbr);
+	printf("or: %d\n", j);
 }
 
 int	main(void)
@@ -296,4 +407,5 @@ int	main(void)
 	space(num);
 	plus(num);
 	mix_flags(c, str, ptr, num, unbr);
+	precision_flag(str, num, unbr);
 }
