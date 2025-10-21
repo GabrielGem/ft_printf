@@ -343,6 +343,7 @@ void	precision_flag(char *str, int num, int unbr)
 {
 	int i, j;
 
+	printf("\n---precision---\n");
 	i = ft_printf("[%.3s]\t", str);
 	printf("my: %d\n", i);
 	j = printf("[%.3s]\t", str);
@@ -363,9 +364,9 @@ void	precision_flag(char *str, int num, int unbr)
 	j = printf("[%-10.3s]\t", str);
 	printf("or: %d\n", j);
 
-	i = ft_printf("[%-10.5d]\t", num);
+	i = ft_printf("[%-10.3d]\t", num);
 	printf("my: %d\n", i);
-	j = printf("[%-10.5d]\t", num);
+	j = printf("[%-10.3d]\t", num);
 	printf("or: %d\n", j);
 
 	num *= -1;
@@ -380,14 +381,14 @@ void	precision_flag(char *str, int num, int unbr)
 	j = printf("[%-10.0d]\t", num);
 	printf("or: %d\n", j);
 
-	i = ft_printf("[%-10.0u]\t", unbr);
+	i = ft_printf("[%-20.11u]\t", unbr);
 	printf("my: %d\n", i);
-	j = printf("[%-10.0u]\t", unbr);
+	j = printf("[%-20.11u]\t", unbr);
 	printf("or: %d\n", j);
 
-	i = ft_printf("[%20.2x][%20.2X]\t", unbr, unbr);
+	i = ft_printf("[%20.9x][%20.9X]\t", unbr, unbr);
 	printf("my: %d\n", i);
-	j = printf("[%20.2x][%20.2X]\t", unbr, unbr);
+	j = printf("[%20.9x][%20.9X]\t", unbr, unbr);
 	printf("or: %d\n", j);
 }
 
