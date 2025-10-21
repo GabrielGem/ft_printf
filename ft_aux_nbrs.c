@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:11:59 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/18 16:43:27 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:08:52 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,25 @@
 
 int	ft_aux_nbr(va_list ap, t_format *format)
 {
-	int		count;
 	int		num;
+	int		count;
 	char	*result;
 
-	count = 0;
 	num = va_arg(ap, int);
+	count = 0;
+	if ((format->flags & PLUS) || (format->flags & SPACE) || num < 0)
+	{
+		count = sign(format, num);
+		if (num < 0)
+			num *= -1;
+	}
 	result = ft_itoa(num);
-	count = ft_strlen(result);
-	if (((format->flags & PLUS) || (format->flags & SPACE)) && num > 0)
-		count += sign(format);
+	count += ft_strlen(result);
+	if (format->flags & DOT)
+	{
+		result = precision(format, result);
+		count = ft_strlen(result);
+	}
 	if (format->width > count)
 		count += ft_pad(format->width - count, format);
 	ft_putstr_fd(result, 1);
