@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:41:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/18 16:31:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:18:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void		flag_width(t_format *parameters, char c);
 void		switch_flags(t_format *format, char c);
 
 int			ft_pad(int size, t_format *parameters);
-int			sign(t_format *format);
+int			sign(t_format *format, int num);
 int			prefix(t_format *format);
+char		*precision(t_format *format, char *num);
 
 int			ft_aux_char(va_list ap, t_format *format);
 int			ft_aux_str(va_list ap, t_format *format);
