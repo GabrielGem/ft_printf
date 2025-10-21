@@ -37,6 +37,8 @@ int	ft_aux_str(va_list ap, t_format *format)
 	count = 0;
 	i = -1;
 	str = va_arg(ap, char *);
+	if (!str && format->flags & DOT && format->precision < 6)
+		return (0);
 	if (!str)
 		str = "(null)";
 	count = ft_strlen(str);
