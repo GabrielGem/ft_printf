@@ -19,7 +19,7 @@ int	ft_pad(int size, t_format *parameters)
 
 	printd = size;
 	c = ' ';
-	if (parameters->flags & ZERO)
+	if (parameters->flags & ZERO && !(parameters->flags & DOT))
 		c = '0';
 	if (size < 0)
 		return (0);
@@ -48,30 +48,30 @@ int	prefix(t_format *format)
 	return (2);
 }
 
-char	*precision(t_format *format, char *num)
+char	*precision(t_format *format, char *str_nbr)
 {
 	int		len;
 	int		i;
-	int		j;
 	int		lending_zeros;
 	char	*new_str;
 
-	if (num[0] == '0' && format->precision == 0) // 0 print nothing
+	if (str_nbr[0] == '0' && format->precision == 0)
 	{
-		free(num);
+		free(str_nbr);
 		new_str = ft_calloc(1, 1);
 		return (new_str);
 	}
-	len = ft_strlen(num);
+	len = ft_strlen(str_nbr);
+	if (format->precision <= len)
+		return (str_nbr);
 	lending_zeros = format->precision - len;
 	if (format->precision > len)
 		new_str = malloc(sizeof(char) * format->precision + 1);
 	i = 0;
-	while (lending_zeros - i)
+	while (i < lending_zeros)
 		new_str[i++] = '0';
-	j = 0;
-	while (len - j)
-		new_str[i++] = num[j++];
-	free(num);
+	while (len--)
+		new_str[i + len] = str_nbr[len];
+	free(str_nbr);
 	return (new_str);
 }
