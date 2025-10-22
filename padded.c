@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:42:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/20 20:48:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:38:18 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*precision(t_format *format, char *str_nbr)
 		return (str_nbr);
 	lending_zeros = format->precision - len;
 	if (format->precision > len)
-		new_str = malloc(sizeof(char) * format->precision + 1);
+		new_str = ft_calloc(sizeof(char), format->precision + 1);
 	i = 0;
 	while (i < lending_zeros)
 		new_str[i++] = '0';
