@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:11:59 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/20 21:08:52 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:50:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ int	ft_aux_unbr(va_list ap, t_format *format)
 
 	count = 0;
 	result = ft_uitoa_base(va_arg(ap, unsigned int), "0123456789");
+	if (!*result)
+	{
+		free(result);
+		result = ft_calloc(2, 1);
+		result[0] = '0';
+	}
 	if (format->flags & DOT)
 		result = precision(format, result);
 	count = ft_strlen(result);
