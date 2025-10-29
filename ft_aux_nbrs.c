@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:11:59 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/21 20:50:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:27:13 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,26 @@ int	ft_aux_nbr(va_list ap, t_format *format)
 {
 	long int	num;
 	int			count;
+	char		signal;
 	char		*result;
 
 	num = va_arg(ap, int);
 	count = 0;
-	if ((format->flags & PLUS) || (format->flags & SPACE) || num < 0)
-	{
-		count = sign(format, num);
-		if (num < 0)
-			num *= -1;
-	}
+	signal = sign(format, num);
+	if (signal)
+		count = 1;
+	if (num < 0)
+		num *= -1;
 	result = ft_itoa_base(num, "0123456789");
+	if (signal && format->flags & ZERO && !(format->flags & DOT))
+		ft_putchar_fd(signal, 1);
 	if (format->flags & DOT)
 		result = precision(format, result);
 	count += ft_strlen(result);
 	if (format->width > count)
 		count += ft_pad(format->width - count, format);
+	if (signal && (!(format->flags & ZERO) || (format->flags & DOT)))
+		ft_putchar_fd(signal, 1);
 	ft_putstr_fd(result, 1);
 	free(result);
 	return (count);
