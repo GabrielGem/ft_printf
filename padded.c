@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:42:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/21 16:38:18 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:16:59 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	ft_pad(int size, t_format *parameters)
 	return (printd);
 }
 
-int	sign(t_format *format, int num)
+char	sign(t_format *format, int num)
 {
 	if ((format->flags & PLUS) && num >= 0)
-		ft_putchar_fd('+', 1);
+		return ('+');
 	if ((format->flags & SPACE) && num >= 0)
-		ft_putchar_fd(' ', 1);
+		return (' ');
 	if (num < 0)
-		ft_putchar_fd('-', 1);
-	return (1);
+		return ('-');
+	return (0);
 }
 
 int	prefix(t_format *format)
