@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_aux_nbrs.c                                      :+:      :+:    :+:   */
+/*   ft_aux_nbrs_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:11:59 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/27 10:27:13 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:34:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	ft_aux_nbr(va_list ap, t_format *format)
 {

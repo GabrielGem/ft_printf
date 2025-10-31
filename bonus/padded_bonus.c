@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   padded.c                                           :+:      :+:    :+:   */
+/*   padded_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:42:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/25 16:16:59 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:34:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	ft_pad(int size, t_format *parameters)
 {

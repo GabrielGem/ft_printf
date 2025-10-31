@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_aux_chrs.c                                      :+:      :+:    :+:   */
+/*   ft_aux_chrs_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 14:36:20 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/10/21 21:01:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:34:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	ft_aux_char(va_list ap, t_format *format)
 {
